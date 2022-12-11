@@ -1,3 +1,4 @@
+import { SecurityService } from './services/securityService';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ecom-app';
+  constructor(public ss: SecurityService) {
+    console.log(ss.profile?.firstName)
+  }
+  async Login() {
+    await this.ss.kc.login(
+      {
+        redirectUri: window.location.origin
+      }
+    )
+  }
+  onLogout() {
+    this.ss.kc.logout(window.location.origin)
+  }
 }
